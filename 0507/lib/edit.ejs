@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Edit crop Data</title>
+</head>
+<body>
+  <h1>Edit crop Info</h1>
+  <hr/>
+  <form method="post">
+    <fieldset>
+      <legend>Edit crop Info</legend>
+      <table>
+        <tr>
+          <td><label>작물</label></td>
+          <td><input type="text" name="작물" value="<%= data.작물 %>" disabled /></td>
+        </tr>
+        <tr>
+          <td><label>온도</label></td>
+          <td><input type="text" name="온도" value="<%= data.온도 %>" /></td>
+        </tr>
+        <tr>
+            <td><label>습도</label></td>
+            <td><input type="text" name="습도" value="<%= data.습도 %>" /></td>
+          </tr>
+          <tr>
+            <td><label>수위</label></td>
+            <td><input type="text" name="수위" value="<%= data.수위 %>" /></td>
+          </tr>
+      </table>
+      <input type="submit" value="Submit!" />
+    </fieldset>
+  </form>
+</body>
+</html>
+ 
