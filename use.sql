@@ -950,6 +950,7 @@ CREATE TABLE `crop` (
   `수위` float DEFAULT NULL,
   `심은날짜` date NOT NULL,
   `갱신시각` datetime DEFAULT NULL,
+  `자동모드` boolean DEFAULT true, 
   PRIMARY KEY (`작물`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
