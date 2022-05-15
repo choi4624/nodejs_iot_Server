@@ -1,9 +1,10 @@
 {
-  "name": "0414",
+  "name": "0507",
   "version": "1.0.0",
   "description": "i4624 ziot ",
   "main": "server.js",
   "dependencies": {
+    "ejs": "^2.7.4",
     "express": "^4.17.3",
     "mysql": "^2.18.1"
   },
