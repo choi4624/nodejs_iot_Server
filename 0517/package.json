@@ -1,0 +1,23 @@
+{
+  "name": "0414",
+  "version": "1.0.0",
+  "description": "i4624 ziot ",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mysql": "^2.18.1"
+  },
+  "scripts": {
+    "test": "ziot test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "no"
+  },
+  "keywords": [
+    "iot"
+  ],
+  "author": "i4624",
+  "license": "ISC"
+}

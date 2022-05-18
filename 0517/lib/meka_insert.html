@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>insert data</title>
+</head>
+<body>
+  <h1>기계 상태 갱신</h1>
+  <hr/>
+  <form method="post">
+    <p> relay 1 2 3 은 tinyint type으로 boolean이 되어 0이면 false, 1이면 true 여야 함</p>
+    <fieldset>
+      <legend>장치 데이터 입력</legend>
+      <table>
+        <tr>
+          <td><label>온도</label></td>
+          <td><input type="text" name="temperature" /></td>
+        </tr>
+        <tr>
+            <td><label>습도</label></td>
+            <td><input type="text" name="humi" /></td>
+        </tr>
+        <tr>
+            <td><label>co2</label></td>
+            <td><input type="text" name="co2" /></td>
+          </tr>
+        <tr>
+            <td><label>수위</label></td>
+            <td><input type="text" name="waterLevel" /></td>
+        </tr>   
+        <tr>
+          <td><label>relay1</label></td>
+          <td><input type="text" name="relay1" /></td>
+        </tr>   
+        <tr>
+        <td><label>relay2</label></td>
+        <td><input type="text" name="relay2" /></td>
+        </tr>   
+      <tr>
+      <td><label>relay3</label></td>
+      <td><input type="text" name="relay3" /></td>
+      </tr>     
+      </table>
+      <input type="submit" value="Add It!">
+    </fieldset>
+  </form>
+</body>
+</html>

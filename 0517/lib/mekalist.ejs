@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>meka Page</title>
+</head>
+<body>
+  <h1>crop List</h1>
+  <a href="/sql/meka/insert">새로운 기기 상태 업데이트(사실 추가)</a>
+  <hr/>
+  <table border="1">
+    <tr>
+      <th>DELETE</th>
+      <th>_id</th>
+      <th>temperature</th>
+      <th>humi</th>
+      <th>co2</th>
+      <th>waterLevel</th>
+      <th>StatTime</th>
+      <th>relay1</th>
+      <th>relay2</th>
+      <th>relay3</th>
+    </tr>
+    <% data.forEach(function (item, index) { %>
+    <tr>
+      <td><a href="/sql/delete/<%= item._id%>">DELETE</a></td>
+      <td><%= item._id %></td>
+      <td><%= item.temperature %></td>
+      <td><%= item.humi %></td>
+      <td><%= item.co2 %></td>
+      <td><%= item.waterLevel %></td>
+      <td><%= item.StatTime %></td>
+      <td><%= item.relay1 %></td>
+      <td><%= item.relay2 %></td>
+      <td><%= item.relay3 %></td>
+    </tr>
+    <% }); %>
+  </table>
+</body>
+</html>
