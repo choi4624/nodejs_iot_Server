@@ -1,0 +1,41 @@
+DB의 내용 추가 
+new table meka1에 대한 부분 
+mysql> desc crop;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| 작물         | varchar(20) | NO   | PRI | NULL    |       |
+| 온도         | float       | YES  |     | NULL    |       |
+| 습도         | float       | YES  |     | NULL    |       |
+| 수위         | float       | YES  |     | NULL    |       |
+| 심은날짜     | date        | NO   |     | NULL    |       |
+| 갱신시각     | datetime    | YES  |     | NULL    |       |
+| 자동모드     | tinyint(1)  | YES  |     | 1       |       |
++--------------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> desc meka1;
++-------------+------------+------+-----+-------------------+----------------+
+| Field       | Type       | Null | Key | Default           | Extra          |
++-------------+------------+------+-----+-------------------+----------------+
+| _id         | int(11)    | NO   | PRI | NULL              | auto_increment |
+| temperature | float      | YES  |     | 25                |                |
+| humi        | float      | YES  |     | 60                |                |
+| co2         | float      | YES  |     | 400               |                |
+| waterLevel  | int(11)    | YES  |     | 1000              |                |
+| StatTime    | datetime   | YES  |     | CURRENT_TIMESTAMP |                |
+| relay1      | tinyint(1) | YES  |     | 0                 |                |
+| relay2      | tinyint(1) | YES  |     | 0                 |                |
+| relay3      | tinyint(1) | YES  |     | 1                 |                |
++-------------+------------+------+-----+-------------------+----------------+
+9 rows in set (0.00 sec)
+
+이런식임 
+
+meka1 DB에 대해서 데이터 입출력 구현 
+
+http://ziot.i4624.cf/sql/meka 
+http://ziot.i4624.cf/sql/meka/table
+http://ziot.i4624.cf/sql/meka/table/final
+등등 
+
