@@ -98,7 +98,7 @@ app.get("/sql", function (req, res) {
   });
 });
 
-app.get("/sql/crop=?", function (req, res) {
+app.get("/sql/:crop", function (req, res) {
   fs.readFile("./lib/selectedList.ejs", "utf8", function (err, data) {
     db.query(
       "select * from crop where 작물=?",
