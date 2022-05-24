@@ -166,8 +166,8 @@
               <% data.forEach(function (item, index) { %>
               <tr>
                 <td><%= item.작물 %></td>
-                <td><%= item.심은날짜 %></td>
-                <td><%= item.갱신시각 %></td>
+                <td><%= new Date(item.심은날짜).toLocaleDateString() %></td>
+                <td><%= new Date(item.갱신시각).toLocaleString() %></td>
               </tr>
               <% }); %>
             </tbody>
