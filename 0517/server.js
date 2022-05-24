@@ -61,8 +61,88 @@ const api = [
   },
 ];
 
-app.get("/api/api", (req, res) => {
-  res.json(api);
+app.get("/", function (req, ack) {
+  fs.readFile("./smartfarm/index.ejs", function (error, data) {
+    ack.writeHead(200, { "Content-Type": "text/html" });
+    ack.end(data);
+  });
+});
+
+app.get("/test", function (req, res) {
+  fs.readFile("./smartfarm/index.ejs", "utf8", function (err, data) {
+    db.query(
+      "select temperature,	humi,	co2,	waterLevel from meka1 ORDER BY _id desc LIMIT 1 ",
+      function (err, results) {
+        if (err) {
+          res.send(err);
+        } else {
+          res.send(
+            ejs.render(data, {
+              data: results,
+            })
+          );
+        }
+      }
+    );
+  });
+});
+
+app.get("/api", function (req, ack) {
+  fs.readFile("apiBasic.HTML", function (error, data) {
+    ack.writeHead(200, { "Content-Type": "text/html" });
+    ack.end(data);
+  });
+});
+
+// SQL get post
+
+// 아두이노 센서 및 릴레이
+
+app.get("/sql/meka/sensor", function (req, res) {
+  fs.readFile("./lib/sensorlist.ejs", "utf8", function (err, data) {
+    db.query(
+      "select temperature,	humi,	co2,	waterLevel from meka1",
+      function (err, results) {
+        if (err) {
+          res.send(err);
+        } else {
+          res.send(
+            ejs.render(data, {
+              data: results,
+            })
+          );
+        }
+      }
+    );
+  });
+});
+
+app.post("/sql/meka/sensor", function (req, res) {
+  const body = req.body;
+  const sql =
+    "insert into meka1 (temperature,	humi,	co2,	waterLevel,	StatTime,	relay1,	relay2,	relay3, relay4) values (?, ?, ?, ?, NOW(), SELECT relay1 FROM meka1 order by _id desc LIMIT 1, SELECT relay2 FROM meka1 order by _id desc LIMIT 1, SELECT relay3 FROM meka1 order by _id desc LIMIT 1, SELECT relay4 FROM meka1 order by _id desc LIMIT 1)";
+  db.query(
+    sql,
+    [body.temperature, body.humi, body.co2, body.waterLevel],
+    function (err, result, fields) {
+      if (err) {
+        console.log(err);
+      }
+      console.log(result);
+      res.redirect("/sql/meka");
+    }
+  );
+});
+
+// 센서 raw
+
+app.get("/sql/meka/sensor/raw", (req, res) => {
+  const sqlselect = "select temperature,	humi,	co2,	waterLevel from meka1";
+
+  db.query(sqlselect, function (err, result, field) {
+    if (err) throw err;
+    res.send(result);
+  });
 });
 
 app.get("/", function (req, ack) {
@@ -171,10 +251,26 @@ app.get("/sql/meka", function (req, res) {
   });
 });
 
+app.get("/sql/meka", function (req, res) {
+  fs.readFile("./lib/mekalist.ejs", "utf8", function (err, data) {
+    db.query("select * from meka1", function (err, results) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(
+          ejs.render(data, {
+            data: results,
+          })
+        );
+      }
+    });
+  });
+});
+
 app.post("/sql/meka/insert", function (req, res) {
   const body = req.body;
   const sql =
-    "insert into meka1 (temperature,	humi,	co2,	waterLevel,	StatTime,	relay1,	relay2,	relay3) values (?, ?, ?, ?, NOW(), ?, ?, ?)";
+    "insert into meka1 (temperature,	humi,	co2,	waterLevel,	StatTime,	relay1,	relay2,	relay3, relay4, autoMode) values (?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?)";
   db.query(
     sql,
     [
@@ -185,6 +281,8 @@ app.post("/sql/meka/insert", function (req, res) {
       body.relay1,
       body.relay2,
       body.relay3,
+      body.relay4,
+      body.autoMode,
     ],
     function (err, result, fields) {
       if (err) {
