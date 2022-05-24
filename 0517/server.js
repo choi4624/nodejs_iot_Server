@@ -64,13 +64,25 @@
   })
 
   app.get('/', function(req, ack){
-    fs.readFile('./smartfarm/index.HTML', function(error, data){
+    fs.readFile('./smartfarm/index.ejs', function(error, data){
     ack.writeHead(200, { 'Content-Type': 'text/html'});
     ack.end(data);
     });
   });
 
-
+  app.get('/test', function (req, res) {
+    fs.readFile('./smartfarm/index.ejs', 'utf8', function (err, data) {
+      db.query('select temperature,	humi,	co2,	waterLevel from meka1 ORDER BY _id desc LIMIT 1 ', function (err, results) {
+        if (err) {
+          res.send(err)
+        } else {
+          res.send(ejs.render(data, {
+            data: results
+          }))
+        }
+      })
+    })
+  })
 
   app.get('/api', function(req, ack){
     fs.readFile('apiBasic.HTML', function(error, data){
@@ -104,7 +116,7 @@ app.post('/sql/meka/sensor', function (req, res) {
       body.temperature,
       body.humi,
       body.co2,
-      body.waterLevel,
+      body.waterLevel
     ], function(err, result, fields) {
         if(err){console.log(err);}
     console.log(result);
@@ -214,7 +226,7 @@ app.get('/sql/meka/sensor/raw', (req,res) => {
 
   app.post('/sql/meka/insert', function (req, res) {
     const body = req.body;
-    const sql = 'insert into meka1 (temperature,	humi,	co2,	waterLevel,	StatTime,	relay1,	relay2,	relay3, relay4) values (?, ?, ?, ?, NOW(),? , ?, ?, ?)';;
+    const sql = 'insert into meka1 (temperature,	humi,	co2,	waterLevel,	StatTime,	relay1,	relay2,	relay3, relay4, autoMode) values (?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?)';;
     db.query(sql, [
         body.temperature,
         body.humi,
@@ -223,7 +235,8 @@ app.get('/sql/meka/sensor/raw', (req,res) => {
         body.relay1,
         body.relay2,
         body.relay3,
-        body.relay4
+        body.relay4,
+        body.autoMode
       ], function(err, result, fields) {
           if(err){console.log(err);}
       console.log(result);
