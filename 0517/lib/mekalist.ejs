@@ -23,10 +23,11 @@
       <th>relay2</th>
       <th>relay3</th>
       <th>relay4</th>
+      <th>autoMode</th>
     </tr>
     <% data.forEach(function (item, index) { %>
     <tr>
-      <td><a href="/sql/delete/<%= item._id%>">DELETE</a></td>
+      <td><a href="/sql/meka/delete/<%= item._id%>">DELETE</a></td>
       <td><%= item._id %></td>
       <td><%= item.temperature %></td>
       <td><%= item.humi %></td>
@@ -37,6 +38,7 @@
       <td><%= item.relay2 %></td>
       <td><%= item.relay3 %></td>
       <td><%= item.relay4 %></td>
+      <td><%= item.autoMode %></td>
     </tr>
     <% }); %>
   </table>
