@@ -233,7 +233,7 @@
             </span>
             <h4 class="my-3">조명</h4>
             <p class="text-muted">
-                <a href="/test/sql/relay1?relay1=1"> 조명 켜짐</a>
+              <a href="/test/sql/relay1?relay1=1"> 조명 켜짐</a>
               <input
                 type="submit"
                 name="relay1"
@@ -257,7 +257,7 @@
             </span>
             <h4 class="my-3">relay1</h4>
             <p class="text-muted">
-                <a href="/test/sql/relay1?relay1=1"> 조명 켜짐</a>
+              <a href="/test/sql/relay1?relay1=1"> 조명 켜짐</a>
               <input
                 type="submit"
                 name="relay1"
@@ -281,7 +281,7 @@
             </span>
             <h4 class="my-3">relay2</h4>
             <p class="text-muted">
-                <a href="/test/sql/relay1?relay2=1"> 조명 켜짐</a>
+              <a href="/test/sql/relay1?relay2=1"> 조명 켜짐</a>
               <input
                 type="submit"
                 name="relay1"
@@ -305,7 +305,7 @@
             </span>
             <h4 class="my-3">relay3</h4>
             <p class="text-muted">
-                <a href="/test/sql/relay1?relay2=1"> 조명 켜짐</a>
+              <a href="/test/sql/relay1?relay2=1"> 조명 켜짐</a>
               <input
                 type="submit"
                 name="relay1"
@@ -329,7 +329,7 @@
             </span>
             <h4 class="my-3">relay4</h4>
             <p class="text-muted">
-                <a href="/test/sql/relay1?relay1=1"> 조명 켜짐</a>
+              <a href="/test/sql/relay1?relay1=1"> 조명 켜짐</a>
               <input
                 type="submit"
                 name="relay1"
@@ -360,31 +360,7 @@
           <canvas id="myChart"></canvas>
         </div>
         <script>
-          let labels = [];
-          for (let i = 0; i < 7; i++) {
-            labels[i] = new Date().getMonth() + 1 + (new Date().getDate() - i);
-          }
-          let temperature = [];
-          data.forEach(function (item, index) {
-            temperature[index] = item.temperature;
-          });
-          const data = {
-            labels: labels,
-            datasets: [
-              {
-                label: "온도",
-                backgroundColor: "rgb(255, 99, 132)",
-                borderColor: "rgb(255, 99, 132)",
-                data: temperature,
-              },
-            ],
-          };
-
-          const config = {
-            type: "line",
-            data: data,
-            options: {},
-          };
+          fetch("/farmingstat").then((response) => console.log(response));
         </script>
         <script>
           const myChart = new Chart(document.getElementById("myChart"), config);
