@@ -327,46 +327,42 @@
     </section>
     
     <!-- About-->
-    <section class="page-section" id="about">
-      <div class="container">
-        <div class="text-center">
-          <h2 class="section-heading text-uppercase">STATS</h2>
-        </div>
+   <section class="page-section" id="about">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase" style="margin-bottom:20px;">STATS</h2>
+            </div>
 
-        <div>
-          <canvas id="myChart"></canvas>
-        </div>
-        <script>
-          let labels = [];
-          for (let i = 0; i < 7; i++) {
-            labels[i] = new Date().getMonth() + 1 + (new Date().getDate() - i);
-          }
-          let temperature = [];
-          data.forEach(function (item, index) {
-            temperature[index] = item.temperature;
-          });
-          const data = {
-            labels: labels,
-            datasets: [
-              {
-                label: "온도",
-                backgroundColor: "rgb(255, 99, 132)",
-                borderColor: "rgb(255, 99, 132)",
-                data: temperature,
-              },
-            ],
-          };
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">
+                google.charts.load('current', {'packages':['corechart']});
+                google.charts.setOnLoadCallback(drawChart);
 
-          const config = {
-            type: "line",
-            data: data,
-            options: {},
-          };
-        </script>
-        <script>
-          const myChart = new Chart(document.getElementById("myChart"), config);
-        </script>
-      </div>
+                function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                        ['date', '수위', '온도'],
+                        ['5/10',  20,     25],
+                        ['5/11',  100,      26],
+                        ['5/12',  80,       24],
+                        ['5/13',  60,      26],
+                        ['5/14',  60,      22],
+                        ['5/16',  70,      24],
+                        ['2007',  30,      24],
+                        ['2007',  100,      20],
+                    ]);
+
+                    var options = {
+                        title: '',
+                        curveType: 'function',
+                        legend: { position: 'bottom' }
+                    };
+                    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+                    chart.draw(data, options);
+                }
+            </script>
+    
+            <div id="curve_chart" style="width: 100%; height: 700px; margin:0 auto; margin-top:15px"></div>
+        </div> 
     </section>
 
     <section class="page-section bg-light" id="team">
