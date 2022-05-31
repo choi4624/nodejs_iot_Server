@@ -107,6 +107,24 @@ app.get('/', function (req, res) {
     })
   })
 })
+app.get("/farmingstat", function (req, res) {
+  fs.readFile("./smartfarm/stat.ejs", "utf8", function (err, data) {
+    db.query(
+      "select * from meka1 where _id=1 OR _id=1000 OR id=2000 OR _id=3000 OR id=3500 OR _id=4000",
+      function (err, results) {
+        if (err) {
+          res.send(err);
+        } else {
+          res.send(
+            ejs.render(data, {
+              data: results,
+            })
+          );
+        }
+      }
+    );
+  });
+});
 
 /*
 app.get('/sql/meka/delete/:id', function (req, res) {
