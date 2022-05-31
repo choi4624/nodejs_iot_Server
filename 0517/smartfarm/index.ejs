@@ -324,133 +324,76 @@
     </section>
     
     <!-- About-->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/8.1.2/es-modules/parts/Chart.min.js"></script>
-        <script>
-          $(document).ready(function() {
-          var timeoutId;
-          var device = [],temperature = [];
-          var graph;
-          getChart();
-
-          function getChart(){
-          if (typeof graph !== "undefined")  //업데이트전의 차트 상태가 보이지 않도록 이전에 생성된 차트 객체를 소멸시킨다
-             graph.destroy();
-          
-          $.getJSON("/getChartData", function(data) {   // 비동기 GET 방식으로 차트에 사용할 데이터를 가져온다.
-                data.sort(function(a, b) {    //JSON 리턴받은 데이터를 오름차순으로 정렬한다.
-                  return a["Times"] - b["Times"];
-                });
-                $.each(data, function(key, value) {  //JSON 각 데이터에 대해 원하는 컬럼값을 리스트에 저장한다.
-                  _id.push(this.Day);
-                  temperature.push(this.temperature);
-                });
-                var lineData = {  // 차트에 사용할 데이터와 데이터 옵션을 지정한다.  데이터는 리스트 형식으로 만들어야 한다.
-                  labels: DayData,
-                  datasets: [
-                    {
-                      label: "Active Power",   
-                      backgroundColor: 'rgba(26,179,148,0.5)',   //차트의 라인(바)색 지정
-                      borderColor: "rgba(26,179,148,0.7)",
-                      pointBackgroundColor: "rgba(26,179,148,1)",  //데이터 점 컬러 지정
-                      pointBorderColor: "#fff",
-                      data: temperature  //차트 데이터 지정
-                    }
-                  ]
-                };
-                var lineOptions = {   //차트 옵션을 정의한다.
-                  responsive: true,    //브라우저의 크기에 따라 차트의 크기와 출력형태도 인터랙티브하게 반응하도록 지정한다.
-                  maintainAspectRatio: false,  //차트의 출력 비율이 고정되도록 한다.
-                  legend: {
-                    display: false  //차트 범례 출력 지정
-                  },
-                  title : { display:true , text: 'Total Power per Hour' }   //차트 제목 지정
-                };
-                var ctx = document.getElementById("lineChart").getContext("2d");  //차트를 뿌려질 태그를 객체로 생성한다.
-                ctx.canvas.height = 600;
-                graph = new Chart(ctx, {    //차트 객체를 생성한다.
-                  type: 'line',  //차트 출력형식 지정
-                  data: lineData,   //출력 데이터 지정
-                  options: lineOptions   //차트 옵션 지정
-                });
-                timeoutId = setTimeout(function() {   //차트가 1분에 한번씩 업데이트 되도록 타임아웃을 설정한다.
-                  getChart();
-                }, 60 * 1000);
-                
-              });
-              
-              }
-          });
-          </script>
-
-        <script>
-          let labels = [];
-          for (let i = 0; i < 7; i++) {
-            labels[i] = new Date().getMonth() + 1 + (new Date().getDate() - i);
-          }
-          let temperature = [];
-          data.forEach(function (item, index) {
-            temperature[index] = item.temperature;
-          });
-          const data = {
-            labels: labels,
-            datasets: [
-              {
-                label: "온도",
-                backgroundColor: "rgb(255, 99, 132)",
-                borderColor: "rgb(255, 99, 132)",
-                data: temperature,
-              },
-            ],
-          };
-          const config = {
-            type: "line",
-            data: data,
-            options: {},
-          };
-        </script>
-        <script>
-          const myChart = new Chart(document.getElementById("myChart"), config);
-        </script>
-      </div>
-    </section>
-
+    
     
    <section class="page-section" id="about">
         <div class="container">
             <div class="text-center">
                 <h2 class="section-heading text-uppercase" style="margin-bottom:20px;">STATS</h2>
             </div>
+    <script>
+            // Load the Visualization API and the piechart package.
+            google.charts.load('current', {
+                'packages': ['line']
+            });
+            google.charts.setOnLoadCallback(drawChart);
+            // Set a callback to run when the Google Visualization API is loaded.
+            // google.setOnLoadCallback(drawChart);
 
-            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-            <script type="text/javascript">
-                google.charts.load('current', {'packages':['corechart']});
-                google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('date', '날짜');
+                data.addColumn('number', 'waterLevel');
+                data.addColumn('number', 'tempertature');
+                row = []
+                var jsonData = $.ajax({
+                    url: "/getchartdata",
+                    dataType: "json",
+                    async: false,
+                    success: function(res) {
+                        var jsonData = $.ajax({
+                            url: "/getchartdata",
+                            dataType: "json",
+                            async: false,
+                            success: function(res) {
+                                $.each(res, function(i, v) {
+                                    var arr = [new Date(v['StatTime']), v['waterLevel'], v['temperature']];
 
-                function drawChart() {
-                    var data = google.visualization.arrayToDataTable([
-                        ['date', '수위', '온도'],
-                        ['5/10',  20,     25],
-                        ['5/11',  100,      26],
-                        ['5/12',  80,       24],
-                        ['5/13',  60,      26],
-                        ['5/14',  60,      22],
-                        ['5/16',  70,      24],
-                        ['2007',  30,      24],
-                        ['2007',  100,      20],
-                    ]);
+                                    row.push(arr);
+                                });
+                            },
+                        });
+                    },
+                });
+                data.addRows(row);
+                // Instantiate and draw our chart, passing in some options.
+                var chart = new google.charts.Line(document.getElementById('chart_div'));
+                var options = {
+                    chart: {
+                        title: '차트',
+                        subtitle: '부제목'
+                    },
+                    width: 900,
+                    height: 500,
+                    hAxis: {
+                        format: 'yy/M/d',
+                        gridlines: {
+                            count: 15,
+                        },
 
-                    var options = {
-                        title: '',
-                        curveType: 'function',
-                        legend: { position: 'bottom' }
-                    };
-                    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-                    chart.draw(data, options);
-                }
-            </script>
+                    },
+                };
+                var chart = new google.charts.Line(document.getElementById('chart_div'));
+                var formatter = new google.visualization.DateFormat({
+                    pattern: 'yy/M/d HH:mm'
+                });
+                formatter.format(data, 0);
+                chart.draw(data, google.charts.Line.convertOptions(options));
+            }
+        </script>
+           
     
-            <div id="curve_chart" style="width: 100%; height: 700px; margin:0 auto; margin-top:15px"></div>
-        </div> 
+              </div> 
     </section>
 
     <section class="page-section bg-light" id="team">
