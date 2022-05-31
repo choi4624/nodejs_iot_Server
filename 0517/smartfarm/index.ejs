@@ -194,21 +194,10 @@
           <div class="col-md-4">
             <span class="fa-stack fa-4x">
               <i class="fas fa-circle fa-stack-2x text-primary"></i>
-              <i class="fas fa-lightbulb fa-stack-1x fa-inverse"></i>
+              <i class="fas fa-temperature-half fa-stack-1x fa-inverse"></i>
             </span>
-            <h4 class="my-3">조명</h4>
-            <p class="text-muted">
-              <input
-                type="button"
-                value="ON"
-                onclick='alert("조명이 켜졌습니다")'
-              />
-              <input
-                type="button"
-                value="OFF"
-                onclick='alert("조명이 꺼졌습니다")'
-              />
-            </p>
+            <h4 class="my-3">이산화탄소</h4>
+            <p class="text-muted">현재농도 : <%= item.co2 %></p>
           </div>
           <div class="col-md-4">
             <span class="fa-stack fa-4x">
@@ -229,6 +218,27 @@
         </div>
       </div>
     </section>
+    <section>
+      <div class="col-md-4">
+        <span class="fa-stack fa-4x">
+          <i class="fas fa-circle fa-stack-2x text-primary"></i>
+          <i class="fas fa-lightbulb fa-stack-1x fa-inverse"></i>
+        </span>
+        <h4 class="my-3">조명</h4>
+        <p class="text-muted">
+          <input
+            type="button"
+            value="ON"
+            onclick='alert("조명이 켜졌습니다")'
+          />
+          <input
+            type="button"
+            value="OFF"
+            onclick='alert("조명이 꺼졌습니다")'
+          />
+        </p>
+      </div>
+    </section>
     <% }); %>
     <!-- About-->
     <section class="page-section" id="about">
@@ -241,8 +251,14 @@
           <canvas id="myChart"></canvas>
         </div>
         <script>
-          const labels = ["4/21", "4/22", "4/23", "4/24", "4/25", "4/26"];
-
+          let labels = [];
+          for (let i = 0; i < 7; i++) {
+            labels[i] = new Date().getMonth() + 1 + (new Date().getDate() - i);
+          }
+          let temperature = [];
+          data.forEach(function (item, index) {
+            temperature[index] = item.temperature;
+          });
           const data = {
             labels: labels,
             datasets: [
@@ -250,7 +266,7 @@
                 label: "온도",
                 backgroundColor: "rgb(255, 99, 132)",
                 borderColor: "rgb(255, 99, 132)",
-                data: [20, 25, 22, 23, 23, 25, 30],
+                data: temperature,
               },
             ],
           };
