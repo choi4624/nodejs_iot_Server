@@ -322,79 +322,82 @@
         </div>
       </div>
     </section>
-    
+
     <!-- About-->
-    
-    
-   <section class="page-section" id="about">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-heading text-uppercase" style="margin-bottom:20px;">STATS</h2>
-            </div>
-    <script>
-            // Load the Visualization API and the piechart package.
-            google.charts.load('current', {
-                'packages': ['line']
-            });
-            google.charts.setOnLoadCallback(drawChart);
-            // Set a callback to run when the Google Visualization API is loaded.
-            // google.setOnLoadCallback(drawChart);
 
-            function drawChart() {
-                var data = new google.visualization.DataTable();
-                data.addColumn('date', '날짜');
-                data.addColumn('number', 'waterLevel');
-                data.addColumn('number', 'tempertature');
-                row = []
-                var jsonData = $.ajax({
-                    url: "/getchartdata",
-                    dataType: "json",
-                    async: false,
-                    success: function(res) {
-                        var jsonData = $.ajax({
-                            url: "/getchartdata",
-                            dataType: "json",
-                            async: false,
-                            success: function(res) {
-                                $.each(res, function(i, v) {
-                                    var arr = [new Date(v['StatTime']), v['waterLevel'], v['temperature']];
+    <!-- 그래프 영역 GRAPH AERA -->
+    <section class="page-section" id="about">
+      <div class="container">
+        <div class="text-center">
+          <h2 class="section-heading text-uppercase">STATS</h2>
+        </div>
+        <div id="chart_div"> chart </div>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+          
+          // Load the Visualization API and the piechart package.
+          google.charts.load('current', {
+              'packages': ['line']
+          });
+          google.charts.setOnLoadCallback(drawChart);
+          // Set a callback to run when the Google Visualization API is loaded.
+          // google.setOnLoadCallback(drawChart);
 
-                                    row.push(arr);
-                                });
-                            },
-                        });
-                    },
-                });
-                data.addRows(row);
-                // Instantiate and draw our chart, passing in some options.
-                var chart = new google.charts.Line(document.getElementById('chart_div'));
-                var options = {
-                    chart: {
-                        title: '차트',
-                        subtitle: '부제목'
-                    },
-                    width: 900,
-                    height: 500,
-                    hAxis: {
-                        format: 'yy/M/d',
-                        gridlines: {
-                            count: 15,
-                        },
-
-                    },
-                };
-                var chart = new google.charts.Line(document.getElementById('chart_div'));
-                var formatter = new google.visualization.DateFormat({
-                    pattern: 'yy/M/d HH:mm'
-                });
-                formatter.format(data, 0);
-                chart.draw(data, google.charts.Line.convertOptions(options));
-            }
-        </script>
-           
-    
-              </div> 
+          function drawChart() {
+              var data = new google.visualization.DataTable();
+              data.addColumn('date', '날짜');
+              data.addColumn('number', 'waterLevel');
+              data.addColumn('number', 'tempertature');
+              row = []
+              var jsonData = $.ajax({
+                  url: "/getchartdata",
+                  dataType: "json",
+                  async: false,
+                  success: function(res) {
+                      var jsonData = $.ajax({
+                          url: "/getchartdata",
+                          dataType: "json",
+                          async: false,
+                          success: function(res) {
+                              $.each(res, function(i, v) {
+                                  var arr = [new Date(v['StatTime']), v['waterLevel'], v['temperature']];
+                                  row.push(arr);
+                              });
+                          },
+                      });
+                  },
+              });
+              data.addRows(row);
+              // Instantiate and draw our chart, passing in some options.
+              var chart = new google.charts.Line(document.getElementById('chart_div'));
+              var options = {
+                  chart: {
+                      title: '차트',
+                      subtitle: '부제목'
+                  },
+                  width: 900,
+                  height: 500,
+                  hAxis: {
+                      format: 'yy/M/d',
+                      gridlines: {
+                          count: 15,
+                      },
+                  },
+              };
+              var chart = new google.charts.Line(document.getElementById('chart_div'));
+              var formatter = new google.visualization.DateFormat({
+                  pattern: 'yy/M/d HH:mm'
+              });
+              formatter.format(data, 0);
+              chart.draw(data, google.charts.Line.convertOptions(options));
+          }
+      </script>
+      </div>
     </section>
+    
+        <!-- 그래프 영역 GRAPH AERA -->
+    
 
     <section class="page-section bg-light" id="team">
       <div class="container">
