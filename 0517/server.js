@@ -6,6 +6,7 @@ var mysql = require('mysql');
 const bodyParser = require('body-parser');
 const ejs = require('ejs')
 const sql = require('./nodejs/mysql')
+const cors = require("cors")
 
 var db = mysql.createConnection({
     host: 'localhost',
@@ -33,6 +34,7 @@ const { response, Router } = require('express');
 const template = require('./lib/template');
 
 app.set('view engine', 'ejs');
+app.use(cors());
 
 const api = [
     {
@@ -62,15 +64,15 @@ const api = [
 app.get("/api/api",(req,res)=>{
     res.json(api);
 })
-
-app.get('/', function(req, ack){
+/*
+app.get('/test', function(req, ack){
   fs.readFile('./smartfarm/index.ejs', function(error, data){
   ack.writeHead(200, { 'Content-Type': 'text/html'});
   ack.end(data);
   });
 });
-
-app.get('/test', function (req, res) {
+*/
+app.get('/', function (req, res) {
   fs.readFile('./smartfarm/index.ejs', 'utf8', function (err, data) {
   db.query('select temperature,	humi,	co2,	waterLevel from meka1 ORDER BY _id desc LIMIT 1 ', function (err, result1) {
     if (err) {
@@ -91,7 +93,7 @@ app.get('/test', function (req, res) {
   })
 })
 
-app.get('/test', function (req, res) {
+app.get('/', function (req, res) {
   fs.readFile('./smartfarm/index.ejs', 'utf8', function (err, data) {
     db.query('select * from crop', function (err, results) {
       if (err) {
@@ -123,7 +125,7 @@ insert into meka1 (temperature) values (SELECT temperature FROM meka1 ORDER BY _
   insert into meka1 (temperature, humi) values (SELECT temperature FROM meka1 ORDER BY _id DESC LIMIT 1, SELECT humi FROM meka1 ORDER BY _id DESC LIMIT 1);
 
   */
-app.get('/test/sql/relay1', function (req, res) {
+app.get('/update/sql/relay1', function (req, res) {
   const body = req.body;  
   const sql = "insert into meka1 (temperature,humi,co2,waterLevel,StatTime,relay1,relay2,relay3,relay4,autoMode) SELECT temperature,humi,co2,waterLevel,NOW(),?,relay2,relay3,relay4,autoMode FROM meka1 ORDER BY _id DESC LIMIT 1";
   var id = [req.query.relay1]
@@ -132,7 +134,59 @@ app.get('/test/sql/relay1', function (req, res) {
   db.query(sql, id, function(err, result, fields) {
         if(err){console.log(err);}
     console.log(result);
-        res.redirect('/test')
+        res.redirect('/')
+  })
+})
+
+app.get('/update/sql/relay2', function (req, res) {
+  const body = req.body;  
+  const sql = "insert into meka1 (temperature,humi,co2,waterLevel,StatTime,relay1,relay2,relay3,relay4,autoMode) SELECT temperature,humi,co2,waterLevel,NOW(),?,relay2,relay3,relay4,autoMode FROM meka1 ORDER BY _id DESC LIMIT 1";
+  var id = [req.query.relay1]
+  console.log(req.query.relay1);
+
+  db.query(sql, id, function(err, result, fields) {
+        if(err){console.log(err);}
+    console.log(result);
+        res.redirect('/')
+  })
+})
+
+app.get('/update/sql/relay2', function (req, res) {
+  const body = req.body;  
+  const sql = "insert into meka1 (temperature,humi,co2,waterLevel,StatTime,relay1,relay2,relay3,relay4,autoMode) SELECT temperature,humi,co2,waterLevel,NOW(),relay1,?,relay3,relay4,autoMode FROM meka1 ORDER BY _id DESC LIMIT 1";
+  var id = [req.query.relay1]
+  console.log(req.query.relay1);
+
+  db.query(sql, id, function(err, result, fields) {
+        if(err){console.log(err);}
+    console.log(result);
+        res.redirect('/')
+  })
+})
+
+app.get('/update/sql/relay3', function (req, res) {
+  const body = req.body;  
+  const sql = "insert into meka1 (temperature,humi,co2,waterLevel,StatTime,relay1,relay2,relay3,relay4,autoMode) SELECT temperature,humi,co2,waterLevel,NOW(),relay1,relay2,?,relay4,autoMode FROM meka1 ORDER BY _id DESC LIMIT 1";
+  var id = [req.query.relay1]
+  console.log(req.query.relay1);
+
+  db.query(sql, id, function(err, result, fields) {
+        if(err){console.log(err);}
+    console.log(result);
+        res.redirect('/')
+  })
+})
+
+app.get('/update/sql/relay4', function (req, res) {
+  const body = req.body;  
+  const sql = "insert into meka1 (temperature,humi,co2,waterLevel,StatTime,relay1,relay2,relay3,relay4,autoMode) SELECT temperature,humi,co2,waterLevel,NOW(),relay1,relay2,relay3,?,autoMode FROM meka1 ORDER BY _id DESC LIMIT 1";
+  var id = [req.query.relay1]
+  console.log(req.query.relay1);
+
+  db.query(sql, id, function(err, result, fields) {
+        if(err){console.log(err);}
+    console.log(result);
+        res.redirect('/')
   })
 })
 
