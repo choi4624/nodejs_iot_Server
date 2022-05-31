@@ -1,4 +1,3 @@
-
 const express = require('express');
 const fs = require('fs');
 const app = express();
@@ -73,6 +72,22 @@ app.get('/test', function(req, ack){
   });
 });
 */
+
+/* 
+
+app.get('/sql/meka/get/:id', function (req, res) {
+
+  var id = [req.params.id];
+
+  const sqlselect = 'SELECT * FROM meka1 where _id=?';
+  db.query(sqlselect, id, function(err, result,field){
+    if(err) throw err;
+    res.send(result)
+})
+
+});
+
+*/
 app.get('/', function (req, res) {
   fs.readFile('./smartfarm/index.ejs', 'utf8', function (err, data) {
   db.query('select temperature,	humi,	co2,	waterLevel from meka1 ORDER BY _id desc LIMIT 1 ', function (err, result1) {
@@ -107,6 +122,7 @@ app.get('/', function (req, res) {
     })
   })
 })
+
 app.get("/farmingstat", function (req, res) {
   fs.readFile("./smartfarm/stat.ejs", "utf8", function (err, data) {
     db.query(
@@ -130,6 +146,8 @@ app.get("/farmingstat", function (req, res) {
 app.get('/sql/meka/delete/:id', function (req, res) {
   const sql = 'delete from meka1 where _id=?';
   var id = [req.params.id];
+
+
   db.query(sql, id, function(err, result, fields) {
     if(err){console.log(err);}
 console.log(result);
@@ -151,61 +169,49 @@ app.get('/update/sql/relay1', function (req, res) {
   db.query(sql, id, function(err, result, fields) {
         if(err){console.log(err);}
     console.log(result);
-        res.redirect('/')
-  })
-})
-
-app.get('/update/sql/relay2', function (req, res) {
-  const body = req.body;  
-  const sql = "insert into meka1 (temperature,humi,co2,waterLevel,StatTime,relay1,relay2,relay3,relay4,autoMode) SELECT temperature,humi,co2,waterLevel,NOW(),?,relay2,relay3,relay4,autoMode FROM meka1 ORDER BY _id DESC LIMIT 1";
-  var id = [req.query.relay1]
-  console.log(req.query.relay1);
-
-  db.query(sql, id, function(err, result, fields) {
-        if(err){console.log(err);}
-    console.log(result);
-        res.redirect('/')
+        res.redirect('/#portfolio')
   })
 })
 
 app.get('/update/sql/relay2', function (req, res) {
   const body = req.body;  
   const sql = "insert into meka1 (temperature,humi,co2,waterLevel,StatTime,relay1,relay2,relay3,relay4,autoMode) SELECT temperature,humi,co2,waterLevel,NOW(),relay1,?,relay3,relay4,autoMode FROM meka1 ORDER BY _id DESC LIMIT 1";
-  var id = [req.query.relay1]
-  console.log(req.query.relay1);
+  var id = [req.query.relay2]
+  console.log(req.query.relay2);
 
   db.query(sql, id, function(err, result, fields) {
         if(err){console.log(err);}
     console.log(result);
-        res.redirect('/')
+        res.redirect('/#portfolio')
   })
 })
 
 app.get('/update/sql/relay3', function (req, res) {
   const body = req.body;  
   const sql = "insert into meka1 (temperature,humi,co2,waterLevel,StatTime,relay1,relay2,relay3,relay4,autoMode) SELECT temperature,humi,co2,waterLevel,NOW(),relay1,relay2,?,relay4,autoMode FROM meka1 ORDER BY _id DESC LIMIT 1";
-  var id = [req.query.relay1]
-  console.log(req.query.relay1);
+  var id = [req.query.relay3]
+  console.log(req.query.relay3);
 
   db.query(sql, id, function(err, result, fields) {
         if(err){console.log(err);}
     console.log(result);
-        res.redirect('/')
+        res.redirect('/#portfolio')
   })
 })
 
 app.get('/update/sql/relay4', function (req, res) {
   const body = req.body;  
   const sql = "insert into meka1 (temperature,humi,co2,waterLevel,StatTime,relay1,relay2,relay3,relay4,autoMode) SELECT temperature,humi,co2,waterLevel,NOW(),relay1,relay2,relay3,?,autoMode FROM meka1 ORDER BY _id DESC LIMIT 1";
-  var id = [req.query.relay1]
-  console.log(req.query.relay1);
+  var id = [req.query.relay4]
+  console.log(req.query.relay4);
 
   db.query(sql, id, function(err, result, fields) {
         if(err){console.log(err);}
     console.log(result);
-        res.redirect('/')
+        res.redirect('/#portfolio')
   })
 })
+
 
 app.get('/api', function(req, ack){
   fs.readFile('apiBasic.HTML', function(error, data){
@@ -272,10 +278,9 @@ app.get('/sql', function (req, res) {
             data: results
           }))
         }
-      }
-    );
-  });
-});
+      })
+    })
+  })
 
   app.get("/sql/crop/:crop", function (req, res) {
     fs.readFile("./lib/selectedList.ejs", "utf8", function (err, data) {
@@ -300,11 +305,14 @@ app.get('/sql', function (req, res) {
   /*
   app.get('/sql/realtime/:id', function (req, res) {
     const sqlselect = "select * from crop where 작물=?"
+
   db.query(sqlselect,req.body,function(err, result, fields){
     if (err) throw err;
     console.log(result);
     res.send('등록이 완료 되었습니다');
   })
+
+
   */
 
   // realtime 업데이트 요청 form arudino 
@@ -341,9 +349,9 @@ app.get('/sql/meka', function (req, res) {
           data: results
         }))
       }
-    );
-  });
-});
+    })
+  })
+})
 
 app.post('/sql/meka/insert', function (req, res) {
   const body = req.body;
@@ -371,9 +379,12 @@ app.get('/sql/meka/insert', function (req, res) {
     })
 })
 
+
 app.get('/sql/meka/delete/:id', function (req, res) {
   const sql = 'delete from meka1 where _id=?';
   var id = [req.params.id];
+
+
   db.query(sql, id, function(err, result, fields) {
     if(err){console.log(err);}
 console.log(result);
@@ -382,11 +393,13 @@ console.log(result);
 })
 
 app.get('/sql/meka/table', (req,res) => {
+
   const sqlselect = 'SELECT * FROM meka1'
-  db.query(sqlselect, function (err, result, field) {
-    if (err) throw err;
-    res.send(result);
-  });
+
+  db.query(sqlselect, function(err, result,field){
+      if(err) throw err;
+      res.send(result)
+  })
 });
 
 app.get('/sql/meka/table/final', (req,res) => {
@@ -400,6 +413,7 @@ app.get('/sql/meka/table/final', (req,res) => {
 });
 
 app.get('/sql/meka/get/:id', function (req, res) {
+
   var id = [req.params.id];
 
   const sqlselect = 'SELECT * FROM meka1 where _id=?';
@@ -407,9 +421,10 @@ app.get('/sql/meka/get/:id', function (req, res) {
     if(err) throw err;
     res.send(result)
 })
+
 });
 
-// 장치 신호 주는 기능 전송 필요
+
 // ----------------------------------------------------------- 작물과 장치의 경계선 -------------------------------------------
 
   // insert HTML 파일 
@@ -444,11 +459,6 @@ app.post('/sql/insert', function (req, res) {
     const sql = 'delete from crop where 작물=?';
     var id = [req.params.id];
 
-app.get("/sql/meka/insert", function (req, res) {
-  fs.readFile("./lib/meka_insert.html", "utf8", function (err, data) {
-    res.send(data);
-  });
-});
 
     db.query(sql, id, function(err, result, fields) {
       if(err){console.log(err);}
@@ -463,10 +473,7 @@ app.get('/sql/edit/:id', function (req, res) {
   var id = req.params.id;
   const sql = 'select * from crop where 작물=?';
 
-//수정
-app.get("/sql/edit/:id", function (req, res) {
-  var id = req.params.id;
-  const sql = "select * from crop where 작물=?";
+
   fs.readFile('./lib/edit.ejs', 'utf8', function (err, data) {
     db.query(sql, id, function (err, result) {
       res.send(ejs.render(data, {
@@ -517,6 +524,7 @@ app.post('/sql/edit/:id', function (req, res) {
   })
 })
 */
+
 // raw DB table 읽기 
 
 app.get('/sql/table', (req,res) => {
@@ -551,19 +559,8 @@ app.use('/js',express.static(__dirname+"/smartfarm/js"));
 app.use('/assets',express.static(__dirname+"/smartfarm/assets"));
 app.use('/db',express.static(__dirname+"/smartfarm/DB"));
 
-  db.query(sqlselect, req.body, function (err, result, fields) {
-    if (err) throw err;
-    console.log(result);
-    res.send("등록이 완료 되었습니다");
-  });
-});
 
-// CSS JS ASSETS db는 안쓸수도 있음
 
-app.use("/css", express.static(__dirname + "/smartfarm/css"));
-app.use("/js", express.static(__dirname + "/smartfarm/js"));
-app.use("/assets", express.static(__dirname + "/smartfarm/assets"));
-app.use("/db", express.static(__dirname + "/smartfarm/DB"));
 
 app.listen(80, function(){
   console.log('listening on 80')
