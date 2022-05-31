@@ -176,7 +176,7 @@
       </div>
     </section>
     <!-- Portfolio Grid-->
-    <% data.forEach(function (item, index) { %>
+    <% data1.forEach(function (item, index) { %>
     <section class="page-section bg-light" id="portfolio">
       <div class="container">
         <div class="text-center">
@@ -194,21 +194,10 @@
           <div class="col-md-4">
             <span class="fa-stack fa-4x">
               <i class="fas fa-circle fa-stack-2x text-primary"></i>
-              <i class="fas fa-lightbulb fa-stack-1x fa-inverse"></i>
+              <i class="fas fa-temperature-half fa-stack-1x fa-inverse"></i>
             </span>
-            <h4 class="my-3">조명</h4>
-            <p class="text-muted">
-              <input
-                type="button"
-                value="ON"
-                onclick='alert("조명이 켜졌습니다")'
-              />
-              <input
-                type="button"
-                value="OFF"
-                onclick='alert("조명이 꺼졌습니다")'
-              />
-            </p>
+            <h4 class="my-3">CO2</h4>
+            <p class="text-muted">현재CO2 : <%= item.CO2 %></p>
           </div>
           <div class="col-md-4">
             <span class="fa-stack fa-4x">
@@ -230,6 +219,136 @@
       </div>
     </section>
     <% }); %>
+
+    <section class="page-section bg-light" id="portfolio">
+      <div class="container">
+        <div class="text-center">
+          <h2 class="section-heading text-uppercase">CONTROL</h2>
+        </div>
+        <div class="row text-center">
+          <div class="col-md-4">
+            <span class="fa-stack fa-4x">
+              <i class="fas fa-circle fa-stack-2x text-primary"></i>
+              <i class="fas fa-lightbulb fa-stack-1x fa-inverse"></i>
+            </span>
+            <h4 class="my-3">조명</h4>
+            <p class="text-muted">
+                <a href="/test/sql/relay1?relay1=1"> 조명 켜짐</a>
+              <input
+                type="submit"
+                name="relay1"
+                value="1"
+                src=""
+                onclick='alert("조명이 켜졌습니다")'
+              />
+              <a href="/test/sql/relay1?relay1=0"> 조명 꺼짐</a>
+              <input
+                type="button"
+                name="relay1"
+                value="0"
+                onclick='alert("조명이 꺼졌습니다")'
+              />
+            </p>
+          </div>
+          <div class="col-md-4">
+            <span class="fa-stack fa-4x">
+              <i class="fas fa-circle fa-stack-2x text-primary"></i>
+              <i class="fas fa-lightbulb fa-stack-1x fa-inverse"></i>
+            </span>
+            <h4 class="my-3">relay1</h4>
+            <p class="text-muted">
+                <a href="/test/sql/relay1?relay1=1"> 조명 켜짐</a>
+              <input
+                type="submit"
+                name="relay1"
+                value="1"
+                src=""
+                onclick='alert("조명이 켜졌습니다")'
+              />
+              <a href="/test/sql/relay1?relay1=0"> 조명 꺼짐</a>
+              <input
+                type="button"
+                name="relay1"
+                value="0"
+                onclick='alert("조명이 꺼졌습니다")'
+              />
+            </p>
+          </div>
+          <div class="col-md-4">
+            <span class="fa-stack fa-4x">
+              <i class="fas fa-circle fa-stack-2x text-primary"></i>
+              <i class="fas fa-lightbulb fa-stack-1x fa-inverse"></i>
+            </span>
+            <h4 class="my-3">relay2</h4>
+            <p class="text-muted">
+                <a href="/test/sql/relay1?relay2=1"> 조명 켜짐</a>
+              <input
+                type="submit"
+                name="relay1"
+                value="1"
+                src=""
+                onclick='alert("조명이 켜졌습니다")'
+              />
+              <a href="/test/sql/relay2?relay2=0"> 조명 꺼짐</a>
+              <input
+                type="button"
+                name="relay1"
+                value="0"
+                onclick='alert("조명이 꺼졌습니다")'
+              />
+            </p>
+          </div>
+          <div class="col-md-4">
+            <span class="fa-stack fa-4x">
+              <i class="fas fa-circle fa-stack-2x text-primary"></i>
+              <i class="fas fa-lightbulb fa-stack-1x fa-inverse"></i>
+            </span>
+            <h4 class="my-3">relay3</h4>
+            <p class="text-muted">
+                <a href="/test/sql/relay1?relay2=1"> 조명 켜짐</a>
+              <input
+                type="submit"
+                name="relay1"
+                value="1"
+                src=""
+                onclick='alert("조명이 켜졌습니다")'
+              />
+              <a href="/test/sql/relay1?relay1=0"> 조명 꺼짐</a>
+              <input
+                type="button"
+                name="relay1"
+                value="0"
+                onclick='alert("조명이 꺼졌습니다")'
+              />
+            </p>
+          </div>
+          <div class="col-md-4">
+            <span class="fa-stack fa-4x">
+              <i class="fas fa-circle fa-stack-2x text-primary"></i>
+              <i class="fas fa-lightbulb fa-stack-1x fa-inverse"></i>
+            </span>
+            <h4 class="my-3">relay4</h4>
+            <p class="text-muted">
+                <a href="/test/sql/relay1?relay1=1"> 조명 켜짐</a>
+              <input
+                type="submit"
+                name="relay1"
+                value="1"
+                src=""
+                onclick='alert("조명이 켜졌습니다")'
+              />
+              <a href="/test/sql/relay1?relay1=0"> 조명 꺼짐</a>
+              <input
+                type="button"
+                name="relay1"
+                value="0"
+                onclick='alert("조명이 꺼졌습니다")'
+              />
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
     <!-- About-->
     <section class="page-section" id="about">
       <div class="container">
