@@ -220,31 +220,27 @@
     </section>
     <% }); %>
   
-    <section class="page-section bg-light" id="portfolio">
-      <div class="container">
-        <div class="row text-center">
-          <div class="col-md-4">
-            <span class="fa-stack fa-4x">
-              <i class="fas fa-circle fa-stack-2x text-primary"></i>
-              <i class="fas fa-toggle-off fa-stack-1x fa-inverse"></i>
-            </span>
-            <h4 class="my-3">조명</h4>
-            <p class="text-muted">
-                <a href="/test/sql/relay1?relay1=1"> 조명 켜짐</a>
-              <input
-                type="submit"
-                name="relay1"
-                value="1"
-                src=""
-                onclick='alert("조명이 켜졌습니다")'
-              />
-              <a href="/test/sql/relay1?relay1=0"> 조명 꺼짐</a>
-              <input
-                type="button"
-                name="relay1"
-                value="0"
-                onclick='alert("조명이 꺼졌습니다")'
-              />
+ <section class="page-section bg-light" id="portfolio">
+        <div class="container">
+          <div class="row text-center">
+            <div class="col-md-4">
+              <span class="fa-stack fa-4x">
+                <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                <i class="fas fa-toggle-off fa-stack-1x fa-inverse"></i>
+              </span>
+              <h4 class="my-3">조명</h4>
+              <p class="text-muted">
+                  <a href="/update/sql/relay1?relay1=1"> 조명 켜짐</a>
+                <form action="/update/sql/relay1?relay1=1" method="get">
+                  <button type="submit" onclick='alert("조명이 켜졌습니다")'> Trun on</button>
+                  
+                </form>
+                  
+                <a href="/update/sql/relay1?relay1=0"> 조명 꺼짐</a>
+                <form action="/update/sql/relay1?relay1=0" method="get">
+                  <button type="submit" onclick='alert("조명이 꺼졌습니다")'> Trun off</button>
+                  
+                </form>
             </p>
           </div>
           <div class="col-md-4">
