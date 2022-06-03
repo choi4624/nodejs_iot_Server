@@ -152,6 +152,8 @@
     </section>
     <% }); %>
   
+      <!-- 버튼 영역 BUTTON AERA -->
+  
  <section class="page-section bg-light" id="portfolio">
         <div class="container">
           <div class="row text-center">
@@ -160,18 +162,10 @@
                 <i class="fas fa-circle fa-stack-2x text-primary"></i>
                 <i class="fas fa-toggle-off fa-stack-1x fa-inverse"></i>
               </span>
-              <h4 class="my-3">조명</h4>
+              <h4 class="my-3">relay1</h4>
               <p class="text-muted">
-                  
-                <form action="/update/sql/relay1?relay1=1" method="get">
-                  <button type="submit" onclick='alert("조명이 켜졌습니다")'> Trun on</button>
-
-                </form>
-                  
-                <form action="/update/sql/relay1?relay1=0" method="get">
-                  <button type="submit" onclick='alert("조명이 꺼졌습니다")'> Trun off</button>
-                  
-                </form>
+                <input type="button" onclick="location.href='/update/sql/relay1?relay1=1';alert('조명이 켜졌습니다')" value="Trun on" class="btn btn-success"/>
+                <input type="button" onclick="location.href='/update/sql/relay1?relay1=0';alert('조명이 꺼졌습니다')" value="Trun off" class="btn btn-danger"/>
             </p>
           </div>
           <div class="col-md-4">
@@ -179,17 +173,11 @@
               <i class="fas fa-circle fa-stack-2x text-primary"></i>
               <i class="fas fa-toggle-off fa-stack-1x fa-inverse"></i>
             </span>
-            <h4 class="my-3">relay1</h4>
+            <h4 class="my-3">relay2</h4>
             <p class="text-muted">
                   
-              <form action="/update/sql/relay1?relay1=1" method="get">
-                <button type="submit" onclick='alert("조명이 켜졌습니다")'> Trun on</button>
-
-              </form>
-                
-              <form action="/update/sql/relay1?relay1=0" method="get">
-                <button type="submit" onclick='alert("조명이 꺼졌습니다")'> Trun off</button>
-                
+              <input type="button" onclick="location.href='/update/sql/relay2?relay2=1';alert('조명이 켜졌습니다')" value="Trun on" class="btn btn-success"/>
+              <input type="button" onclick="location.href='/update/sql/relay2?relay2=0';alert('조명이 꺼졌습니다')" value="Trun off" class="btn btn-danger"/>                
               </form>
           </p>
           </div>
@@ -200,14 +188,9 @@
             </span>
             <h4 class="my-3">relay2</h4>
             <p class="text-muted">
-                  
-              <form action="/update/sql/relay1?relay1=1" method="get">
-                <button type="submit" onclick='alert("조명이 켜졌습니다")'> Trun on</button>
 
-              </form>
-                
-              <form action="/update/sql/relay1?relay1=0" method="get">
-                <button type="submit" onclick='alert("조명이 꺼졌습니다")'> Trun off</button>
+              <input type="button" onclick="location.href='/update/sql/relay3?relay3=1';alert('조명이 켜졌습니다')" value="Trun on" class="btn btn-success"/>
+              <input type="button" onclick="location.href='/update/sql/relay3?relay3=0';alert('조명이 꺼졌습니다')" value="Trun off" class="btn btn-danger"/>
                 
               </form>
           </p>
@@ -219,21 +202,15 @@
             </span>
             <h4 class="my-3">relay4</h4>
             <p class="text-muted">
-                  
-              <form action="/update/sql/relay1?relay1=1" method="get">
-                <button type="submit" onclick='alert("조명이 켜졌습니다")'> Trun on</button>
-
-              </form>
-                
-              <form action="/update/sql/relay1?relay1=0" method="get">
-                <button type="submit" onclick='alert("조명이 꺼졌습니다")'> Trun off</button>
-                
-              </form>
-          </p>
+              <input type="button" onclick="location.href='/update/sql/relay4?relay4=1';alert('조명이 켜졌습니다')" value="Trun on" class="btn btn-success"/>
+              <input type="button" onclick="location.href='/update/sql/relay4?relay4=0';alert('조명이 꺼졌습니다')" value="Trun off" class="btn btn-danger"/>    
+            </p>
           </div>
         </div>
       </div>
     </section>
+    
+    
     <!-- About-->
 
     <!-- 그래프 영역 GRAPH AERA -->
