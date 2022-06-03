@@ -79,6 +79,7 @@
         >
       </div>
     </header>
+
     <!-- Services-->
     <section class="page-section" id="services">
       <div class="container">
@@ -95,7 +96,7 @@
               </tr>
             </thead>
             <tbody>
-              <% data.forEach(function (item, index) { %>
+              <% data2.forEach(function (item, index) { %>
               <tr>
                 <td><%= item.작물 %></td>
                 <td><%= new Date(item.심은날짜).toLocaleDateString() %></td>
