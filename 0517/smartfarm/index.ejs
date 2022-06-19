@@ -11,7 +11,7 @@
     <meta name="author" content="" />
     <title>Smart Farm</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon" sizes="16x16">
     <!-- Font Awesome icons (free version)-->
     <script
       src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
@@ -34,77 +34,9 @@
     <script>
       history.scrollRestoration = "manual";
     </script>
-    <style>
-      /* The Modal (background) */
-      .modal1 {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 1; /* Sit on top */
-        left: 0;
-        top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0, 0, 0); /* Fallback color */
-        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-      }
-
-      /* Modal Content/Box */
-      .modal1-content {
-        background-color: #fefefe;
-        margin: 15% auto; /* 15% from the top and centered */
-        padding: 20px;
-        border: 1px solid #888;
-        width: 30%; /* Could be more or less, depending on screen size */
-      }
-    </style>
   </head>
   <body id="page-top">
-    <div id="myModal" class="modal1">
-      <!-- Modal content -->
-      <div class="modal1-content">
-        <!-- <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 24pt;">공지</span></b></span></p> -->
-        <p
-          style="
-            text-align: center;
-            line-height: 1.5;
-            font-weight: bold;
-            font-size: 20px;
-          "
-        >
-          <br />한시간동안 변화
-        </p>
-        <p style="text-align: center; line-height: 1.5">
-          <br />온도 : 3°C 상승
-        </p>
-        <p style="text-align: center; line-height: 1.5"><br />습도 : 3% 상승</p>
-        <p style="text-align: center; line-height: 1.5">
-          <br />수위 : 물이 없습니다. 물을 채워주세요.
-        </p>
-        <p><br /></p>
-        <div
-          style="
-            cursor: pointer;
-            background-color: #dddddd;
-            text-align: center;
-            padding-bottom: 10px;
-            padding-top: 10px;
-          "
-          onClick="close_pop();"
-        >
-          <span class="pop_bt" style="font-size: 13pt"> 닫기 </span>
-        </div>
-      </div>
-    </div>
-    <script type="text/javascript">
-      jQuery(document).ready(function () {
-        $("#myModal").show();
-      });
-      //팝업 Close 기능
-      function close_pop(flag) {
-        $("#myModal").hide();
-      }
-    </script>
+    
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
       <div class="container">
@@ -147,6 +79,7 @@
         >
       </div>
     </header>
+
     <!-- Services-->
     <section class="page-section" id="services">
       <div class="container">
@@ -163,7 +96,7 @@
               </tr>
             </thead>
             <tbody>
-              <% data.forEach(function (item, index) { %>
+              <% data2.forEach(function (item, index) { %>
               <tr>
                 <td><%= item.작물 %></td>
                 <td><%= new Date(item.심은날짜).toLocaleDateString() %></td>
@@ -176,7 +109,7 @@
       </div>
     </section>
     <!-- Portfolio Grid-->
-    <% data1.forEach(function (item, index) { %>
+      <% data1.forEach(function (item, index) { %>
     <section class="page-section bg-light" id="portfolio">
       <div class="container">
         <div class="text-center">
@@ -194,10 +127,10 @@
           <div class="col-md-4">
             <span class="fa-stack fa-4x">
               <i class="fas fa-circle fa-stack-2x text-primary"></i>
-              <i class="fas fa-temperature-half fa-stack-1x fa-inverse"></i>
+              <i class="fas fa-smog fa-stack-1x fa-inverse"></i>
             </span>
             <h4 class="my-3">CO2</h4>
-            <p class="text-muted">현재CO2 : <%= item.CO2 %></p>
+            <p class="text-muted">현재CO2 : <%= item.co2 %></p>
           </div>
           <div class="col-md-4">
             <span class="fa-stack fa-4x">
@@ -219,159 +152,178 @@
       </div>
     </section>
     <% }); %>
-
-    <section class="page-section bg-light" id="portfolio">
-      <div class="container">
-        <div class="text-center">
-          <h2 class="section-heading text-uppercase">CONTROL</h2>
-        </div>
-        <div class="row text-center">
-          <div class="col-md-4">
-            <span class="fa-stack fa-4x">
-              <i class="fas fa-circle fa-stack-2x text-primary"></i>
-              <i class="fas fa-lightbulb fa-stack-1x fa-inverse"></i>
-            </span>
-            <h4 class="my-3">조명</h4>
-            <p class="text-muted">
-              <a href="/test/sql/relay1?relay1=1"> 조명 켜짐</a>
-              <input
-                type="submit"
-                name="relay1"
-                value="1"
-                src=""
-                onclick='alert("조명이 켜졌습니다")'
-              />
-              <a href="/test/sql/relay1?relay1=0"> 조명 꺼짐</a>
-              <input
-                type="button"
-                name="relay1"
-                value="0"
-                onclick='alert("조명이 꺼졌습니다")'
-              />
+  
+      <!-- 버튼 영역 BUTTON AERA -->
+  
+ <section class="page-section bg-light" id="portfolio">
+        <div class="container">
+          <div class="row text-center">
+            <div class="col-md-4">
+              <span class="fa-stack fa-4x">
+                <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                <i class="fas fa-toggle-off fa-stack-1x fa-inverse"></i>
+              </span>
+              <h4 class="my-3">relay1</h4>
+              <p class="text-muted">
+                <input type="button" onclick="location.href='/update/sql/relay1?relay1=1';alert('조명이 켜졌습니다')" value="Trun on" class="btn btn-success"/>
+                <input type="button" onclick="location.href='/update/sql/relay1?relay1=0';alert('조명이 꺼졌습니다')" value="Trun off" class="btn btn-danger"/>
             </p>
           </div>
           <div class="col-md-4">
             <span class="fa-stack fa-4x">
               <i class="fas fa-circle fa-stack-2x text-primary"></i>
-              <i class="fas fa-lightbulb fa-stack-1x fa-inverse"></i>
-            </span>
-            <h4 class="my-3">relay1</h4>
-            <p class="text-muted">
-              <a href="/test/sql/relay1?relay1=1"> 조명 켜짐</a>
-              <input
-                type="submit"
-                name="relay1"
-                value="1"
-                src=""
-                onclick='alert("조명이 켜졌습니다")'
-              />
-              <a href="/test/sql/relay1?relay1=0"> 조명 꺼짐</a>
-              <input
-                type="button"
-                name="relay1"
-                value="0"
-                onclick='alert("조명이 꺼졌습니다")'
-              />
-            </p>
-          </div>
-          <div class="col-md-4">
-            <span class="fa-stack fa-4x">
-              <i class="fas fa-circle fa-stack-2x text-primary"></i>
-              <i class="fas fa-lightbulb fa-stack-1x fa-inverse"></i>
+              <i class="fas fa-toggle-off fa-stack-1x fa-inverse"></i>
             </span>
             <h4 class="my-3">relay2</h4>
             <p class="text-muted">
-              <a href="/test/sql/relay1?relay2=1"> 조명 켜짐</a>
-              <input
-                type="submit"
-                name="relay1"
-                value="1"
-                src=""
-                onclick='alert("조명이 켜졌습니다")'
-              />
-              <a href="/test/sql/relay2?relay2=0"> 조명 꺼짐</a>
-              <input
-                type="button"
-                name="relay1"
-                value="0"
-                onclick='alert("조명이 꺼졌습니다")'
-              />
-            </p>
+                  
+              <input type="button" onclick="location.href='/update/sql/relay2?relay2=1';alert('조명이 켜졌습니다')" value="Trun on" class="btn btn-success"/>
+              <input type="button" onclick="location.href='/update/sql/relay2?relay2=0';alert('조명이 꺼졌습니다')" value="Trun off" class="btn btn-danger"/>                
+              </form>
+          </p>
           </div>
           <div class="col-md-4">
             <span class="fa-stack fa-4x">
               <i class="fas fa-circle fa-stack-2x text-primary"></i>
-              <i class="fas fa-lightbulb fa-stack-1x fa-inverse"></i>
+              <i class="fas fa-toggle-off fa-stack-1x fa-inverse"></i>
             </span>
-            <h4 class="my-3">relay3</h4>
+            <h4 class="my-3">relay2</h4>
             <p class="text-muted">
-              <a href="/test/sql/relay1?relay2=1"> 조명 켜짐</a>
-              <input
-                type="submit"
-                name="relay1"
-                value="1"
-                src=""
-                onclick='alert("조명이 켜졌습니다")'
-              />
-              <a href="/test/sql/relay1?relay1=0"> 조명 꺼짐</a>
-              <input
-                type="button"
-                name="relay1"
-                value="0"
-                onclick='alert("조명이 꺼졌습니다")'
-              />
-            </p>
+
+              <input type="button" onclick="location.href='/update/sql/relay3?relay3=1';alert('조명이 켜졌습니다')" value="Trun on" class="btn btn-success"/>
+              <input type="button" onclick="location.href='/update/sql/relay3?relay3=0';alert('조명이 꺼졌습니다')" value="Trun off" class="btn btn-danger"/>
+                
+              </form>
+          </p>
           </div>
           <div class="col-md-4">
             <span class="fa-stack fa-4x">
               <i class="fas fa-circle fa-stack-2x text-primary"></i>
-              <i class="fas fa-lightbulb fa-stack-1x fa-inverse"></i>
+              <i class="fas fa-toggle-off fa-stack-1x fa-inverse"></i>
             </span>
             <h4 class="my-3">relay4</h4>
             <p class="text-muted">
-              <a href="/test/sql/relay1?relay1=1"> 조명 켜짐</a>
-              <input
-                type="submit"
-                name="relay1"
-                value="1"
-                src=""
-                onclick='alert("조명이 켜졌습니다")'
-              />
-              <a href="/test/sql/relay1?relay1=0"> 조명 꺼짐</a>
-              <input
-                type="button"
-                name="relay1"
-                value="0"
-                onclick='alert("조명이 꺼졌습니다")'
-              />
+              <input type="button" onclick="location.href='/update/sql/relay4?relay4=1';alert('조명이 켜졌습니다')" value="Trun on" class="btn btn-success"/>
+              <input type="button" onclick="location.href='/update/sql/relay4?relay4=0';alert('조명이 꺼졌습니다')" value="Trun off" class="btn btn-danger"/>    
             </p>
           </div>
         </div>
       </div>
     </section>
+    
+    
     <!-- About-->
+
+    <!-- 그래프 영역 GRAPH AERA -->
     <section class="page-section" id="about">
       <div class="container">
         <div class="text-center">
           <h2 class="section-heading text-uppercase">STATS</h2>
         </div>
+        <div id="chart_div"> chart </div>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+          
+          // Load the Visualization API and the piechart package.
+          google.charts.load('current', {
+              'packages': ['line']
+          });
+          google.charts.setOnLoadCallback(drawChart);
+          // Set a callback to run when the Google Visualization API is loaded.
+          // google.setOnLoadCallback(drawChart);
 
-        <div>
-          <canvas id="myChart"></canvas>
-        </div>
-        <script>
-          fetch("/farmingstat").then((response) => console.log(response));
-        </script>
-        <script>
-          const myChart = new Chart(document.getElementById("myChart"), config);
-        </script>
+          function drawChart() {
+              var data = new google.visualization.DataTable();
+              data.addColumn('date', '날짜');
+              data.addColumn('number', 'waterLevel');
+              data.addColumn('number', 'tempertature');
+              row = []
+              var jsonData = $.ajax({
+                  url: "/getchartdata",
+                  dataType: "json",
+                  async: false,
+                  success: function(res) {
+                      var jsonData = $.ajax({
+                          url: "/getchartdata",
+                          dataType: "json",
+                          async: false,
+                          success: function(res) {
+                              $.each(res, function(i, v) {
+                                  var arr = [new Date(v['StatTime']), v['waterLevel'], v['temperature']];
+                                  row.push(arr);
+                              });
+                          },
+                      });
+                  },
+              });
+              data.addRows(row);
+              // Instantiate and draw our chart, passing in some options.
+              var chart = new google.charts.Line(document.getElementById('chart_div'));
+              var options = {
+                  chart: {
+                      title: '차트',
+                      subtitle: '부제목'
+                  },
+                  width: 900,
+                  height: 500,
+                  hAxis: {
+                      format: 'yy/M/d',
+                      gridlines: {
+                          count: 15,
+                      },
+                  },
+              };
+              var chart = new google.charts.Line(document.getElementById('chart_div'));
+              var formatter = new google.visualization.DateFormat({
+                  pattern: 'yy/M/d HH:mm'
+              });
+              formatter.format(data, 0);
+              chart.draw(data, google.charts.Line.convertOptions(options));
+          }
+      </script>
       </div>
     </section>
+    
+        <!-- 그래프 영역 GRAPH AERA -->
+    
 
     <section class="page-section bg-light" id="team">
       <div class="container">
         <div class="text-center">
           <h2 class="section-heading text-uppercase">TEAM</h2>
+        </div>
+        <div class="row text-center">
+          <div class="col-md-4">
+            <img src="assets/img/iot.png" style="width: 110px; height: 110px;">
+            <h4 class="my-3">IoT</h4>
+            <p style="color: black; font-size: 20px;">최병훈</p>
+            <p style="color: black; font-size: 20px;">김고은</p>
+            <p style="color: black; font-size: 20px;">서윤교</p>
+            <p style="color: black; font-size: 20px;">이유비</p>
+          </div>
+          <div class="col-md-4">
+            <img src="assets/img/app.png" style="width: 110px; height: 110px;">
+            <h4 class="my-3">APP</h4>
+            <p style="color: black; font-size: 20px;">김건희</p>
+            <p style="color: black; font-size: 20px;">조건희</p>
+            <p style="color: black; font-size: 20px;">박소현</p>
+            <p style="color: black; font-size: 20px;">유준혁</p>
+          </div>
+          <div class="col-md-4">
+            <img src="assets/img/web.png" style="width: 110px; height: 110px;">
+            <h4 class="my-3">WEB</h4>
+            <p style="color: black; font-size: 20px;">민준기</p>
+            <p style="color: black; font-size: 20px;">김준형</p>
+            <p style="color: black; font-size: 20px;">박현서</p>
+          </div>
+          <div class="col-md-4">
+            <img src="assets/img/server.png" style="width: 110px; height: 110px;">
+            <h4 class="my-3">SERVER</h4>
+            <p style="color: black; font-size: 20px;">최병훈</p>
+            <p style="color: black; font-size: 20px;">김호진</p>
+
+          </div>
         </div>
       </div>
     </section>
